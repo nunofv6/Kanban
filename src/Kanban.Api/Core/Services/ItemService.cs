@@ -40,4 +40,18 @@ public class ItemService(IKanbanDbContext db)
         await db.SaveChangesAsync();
         return item;
     }
+
+    public async Task<bool> DeleteItem(int id)
+    {
+        Item? item = await db.Items.FindAsync(id);
+
+        if (item is null)
+        {
+            return false;
+        }
+
+        db.Items.Remove(item);
+        await db.SaveChangesAsync();
+        return true;
+    }
 }

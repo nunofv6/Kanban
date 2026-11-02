@@ -36,5 +36,16 @@ public static class ItemEndpoints
 
             return Results.NoContent();
         });
+
+        items.MapDelete("/{id}", async (int id, ItemService itemService) =>
+        {
+            bool res = await itemService.DeleteItem(id);
+            if (!res)
+            {
+                return Results.NotFound();
+            }
+            
+            return Results.NoContent();
+        });
     }
 }
