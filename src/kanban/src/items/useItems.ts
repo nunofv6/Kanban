@@ -1,6 +1,6 @@
 import type { CreateItemRequest, Item } from "@/api/types"
 import { useEffect, useState } from "react"
-import { createItem, getItems } from "./itemsApi"
+import { createItem, deleteItem, getItems } from "./itemsApi"
 
 export function useItems() {
     const [items, setItems] = useState<Item[]>([])
@@ -15,5 +15,10 @@ export function useItems() {
         setItems(prev => [...prev, created])
     }
 
-    return { items, addItems }
+    const removeItem = async (id: number) => {
+        await deleteItem(id)
+        setItems(prev => prev.filter(item => item.id !== id))
+    }
+
+    return { items, addItems, removeItem }
 }

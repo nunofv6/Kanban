@@ -5,4 +5,6 @@ public class Item
     public required string Description { get; set; }
     public required Priority Priority { get; set; }
     public required Status Status { get; set; }
+    public int BoardId { get; set; }
+    public Board Board { get; set; } = null!;
 }

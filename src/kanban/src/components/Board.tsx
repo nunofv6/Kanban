@@ -1,9 +1,9 @@
 import { useItems } from "@/items/useItems"
 import CreateItemDialog from "./CreateItemDialog"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import ItemCard from "./ItemCard"
 
 export default function Board() {
-    const { items, addItems } = useItems()
+    const { items, addItems, removeItem } = useItems()
 
     const columns = [
         { status: 'ToDo', title: 'To Do' },
@@ -29,16 +29,9 @@ export default function Board() {
                     <h2 className="text-sm font-semibold">{column.title}</h2>
                 </div>
 
-                <div className="flex w-40 flex-col gap-2 overflow-y-auto px-3 pb-3">
+                <div className="flex flex-1 flex-col gap-2 overflow-y-auto px-3 pb-3">
                     {items.filter(item => item.status === column.status).map(item => (
-                        <Card key={item.id}>
-                            <CardHeader>
-                                <CardTitle>{item.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p>{item.description}</p>
-                            </CardContent>
-                        </Card>
+                        <ItemCard key={item.id} item={item} onRemove={removeItem}/>
                     ))}
                 </div>
             </section>
