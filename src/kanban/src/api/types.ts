@@ -1,3 +1,9 @@
+export type Board = {
+    id: number
+    title: string
+    createdAt: string
+}
+
 export type Item = {
     id: number
     title: string
@@ -6,10 +12,21 @@ export type Item = {
     status: Status
 }
 
+export type CreateBoardRequest = {
+    title: string
+}
+
 export type CreateItemRequest = {
     title: string
     description: string
     priority: Priority
+}
+
+export type UpdateItemRequest = {
+    title: string
+    description: string
+    priority: Priority
+    status: Status
 }
 
 export const PRIORITIES = ['Low', 'Medium', 'High', 'Critical'] as const

@@ -5,5 +5,11 @@ public class UpdateItemDto
     public required Priority Priority { get; set; }
     public required Status Status { get; set; }
 
-    public Item MapToEntity() => new() { Title = Title, Description = Description, Priority = Priority, Status = Status };
+    public void ApplyToEntity(Item item)
+    {
+        item.Title = Title;
+        item.Description = Description;
+        item.Priority = Priority;
+        item.Status = Status;
+    }
 }

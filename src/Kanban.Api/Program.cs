@@ -11,6 +11,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<IKanbanDbContext, KanbanDbContext>(options => 
     options.UseSqlite("Data Source=kanban.db"));
 
+builder.Services.AddScoped<BoardService>();
 builder.Services.AddScoped<ItemService>();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -29,6 +30,7 @@ app.UseHttpsRedirection();
 
 var api = app.MapGroup("/api/v1");
 
+BoardEndpoints.Map(api);
 ItemEndpoints.Map(api);
 
 app.Run();
